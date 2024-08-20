@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from main.models import Car, CarBrand
@@ -13,6 +14,13 @@ class CarBrandListView(ListAPIView):
 class BrandDetailView(RetrieveAPIView):
     queryset = CarBrand.objects.all()
     serializer_class = CarBrandSingleSerializer
+
+
+class CarsView(ListAPIView):
+    queryset = Car.objects.all()
+    serializer_class = CarSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['brand', 'price', 'name']
 
 
 class CarDetailView(RetrieveAPIView):

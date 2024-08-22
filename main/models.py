@@ -1,5 +1,7 @@
 from django.db import models
 
+from accounts.models import User
+
 
 class CarBrand(models.Model):
     name = models.CharField(max_length=255)
@@ -25,6 +27,7 @@ class Category(models.Model):
 
 class Car(models.Model):
     name = models.CharField(max_length=300)
+    user = models.ForeignKey(User, models.SET_NULL, blank=True, null=True)
     produced_year = models.DateField()
     color = models.ForeignKey(CarColor, models.CASCADE, related_name='cars')
     price = models.PositiveIntegerField()

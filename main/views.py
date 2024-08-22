@@ -1,7 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters.views import FilterView
 
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, ListCreateAPIView
 
 from main.filters import CarFilter
 from main.models import Car, CarBrand
@@ -18,7 +18,7 @@ class BrandDetailView(RetrieveAPIView):
     serializer_class = CarBrandSingleSerializer
 
 
-class CarsView(ListAPIView):
+class CarsView(ListCreateAPIView):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
     filter_backends = [DjangoFilterBackend]

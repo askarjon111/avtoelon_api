@@ -9,4 +9,4 @@ class CarFilter(filters.FilterSet):
 
     class Meta:
         model = Car
-        fields = ['name', 'brand', 'price_gte', 'price_lte']
+        fields = ['name', 'brand', 'price_gte', 'price_lte', 'category']

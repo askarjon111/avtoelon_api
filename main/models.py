@@ -16,6 +16,13 @@ class CarColor(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+
 class Car(models.Model):
     name = models.CharField(max_length=300)
     produced_year = models.DateField()
@@ -25,6 +32,7 @@ class Car(models.Model):
     location = models.CharField(max_length=500)
     brand = models.ForeignKey(CarBrand, models.CASCADE, related_name='cars')
     fuel = models.CharField(max_length=200, blank=True, null=True)
+    category = models.ForeignKey(Category, models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -1,12 +1,15 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from django_filters.views import FilterView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, ListCreateAPIView
 
 from main.filters import CarFilter
 from main.models import Car, CarBrand
 from main.serializers import CarBrandSerializer, CarBrandSingleSerializer, CarSerializer
-
+from django.shortcuts import render, redirect
+from .forms import CarForm
+from django.contrib.auth.decorators import login_required
 
 class CarBrandListView(ListAPIView):
     queryset = CarBrand.objects.all()
@@ -29,3 +32,13 @@ class CarsView(ListCreateAPIView):
 class CarDetailView(RetrieveAPIView):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
+
+
+@api_view(['POST'])
+def create_car_view(request):
+    if request.method == 'POST':
+        serializer = CarSerializer(data=request.data)
+        if serializer.is_valid():
+            car = serializer.save(user=request.user)  # Set the current user
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)

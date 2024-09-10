@@ -14,7 +14,6 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
     is_staff = models.BooleanField(default=False)
     telegram_id = models.CharField(
         max_length=30, unique=True, blank=True, null=True)
-    objects = UserManager()
 
     USERNAME_FIELD = 'phone_number'
 
@@ -28,5 +27,3 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
         return self.phone_number
 
     objects = UserManager()
-
-# AUTH_USER_MODEL = 'accounts.User'

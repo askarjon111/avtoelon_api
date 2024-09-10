@@ -7,7 +7,7 @@ class UserManager(BaseUserManager):
     def create_user(self, phone_number, password=None, **extra_fields):
         """Creates and saves a new user"""
         if not phone_number:
-            raise ValueError("Users must have an phone_number address")
+            raise ValueError("Users must have an phone_number")
         user = self.model(phone_number=phone_number, **extra_fields, password=make_password(password))
         user.save(using=self._db)
 

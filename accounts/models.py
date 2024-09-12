@@ -27,3 +27,13 @@ class User(AbstractBaseUser, PermissionsMixin, models.Model):
         return self.phone_number
 
     objects = UserManager()
+
+
+class AuthCode(models.Model):
+    code = models.CharField(max_length=6)
+    user = models.ForeignKey(User, models.CASCADE)
+    created_at = models.DateTimeField(auto_now=True)
+    sent_to_adress = models.EmailField(max_length=200)
+
+    def __str__(self):
+        return self.code

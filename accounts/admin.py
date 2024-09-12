@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from accounts.models import User
+from accounts.models import AuthCode, User
 
 
 class UserAdmin(UserAdmin):
@@ -29,3 +29,4 @@ class UserAdmin(UserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+admin.site.register(AuthCode)

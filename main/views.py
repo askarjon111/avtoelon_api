@@ -10,6 +10,8 @@ from main.serializers import CarBrandSerializer, CarBrandSingleSerializer, CarSe
 from django.shortcuts import render, redirect
 from .forms import CarForm
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+
 
 class CarBrandListView(ListAPIView):
     queryset = CarBrand.objects.all()
@@ -42,3 +44,11 @@ def create_car_view(request):
             car = serializer.save(user=request.user)  # Set the current user
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
+
+@api_view(['GET'])
+def send_email_view(request):
+    send_mail('Test mail', 'this is a test email',
+              'askarjon.abdullayev@gmail.com', ['aslbeksaitqulov0124@gmail.com'], fail_silently=False)
+
+    return Response({'status': 'ok'})

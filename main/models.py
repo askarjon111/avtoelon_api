@@ -5,7 +5,7 @@ from accounts.models import User
 
 class CarBrand(models.Model):
     name = models.CharField(max_length=255)
-    logo = models.ImageField(upload_to='cars/brands/')
+    logo = models.ImageField(upload_to='cars/brands/', blank=True, null=True)
 
     def __str__(self):
         return self.name

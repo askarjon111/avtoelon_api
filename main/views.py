@@ -10,7 +10,7 @@ from main.serializers import CarBrandSerializer, CarBrandSingleSerializer, CarSe
 from django.shortcuts import render, redirect
 from .forms import CarForm
 from django.contrib.auth.decorators import login_required
-from main.tasks import send_email
+from main.tasks import create_cars, send_email
 
 
 class CarBrandListView(ListAPIView):

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+from celery.schedules import crontab
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,8 +132,8 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'askarjon.abdullayev'
 EMAIL_HOST_PASSWORD = 'kdrerwbklpoooxlp'
 
-CELERY_BROKER_URL = 'redis://:password@137.184.114.36:6379'
-CELERY_RESULT_BACKEND = 'redis://:password@137.184.114.36:6379'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -153,3 +155,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+CELERY_BEAT_SCHEDULE = {
+    "send_email": {
+        "task": "main.tasks.send_email",
+        "schedule": crontab(minute="*/1"),
+    },
+}

@@ -128,7 +128,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'askarjon.abdullayev'
-EMAIL_HOST_PASSWORD = 'rkuqkoroactxzngj'
+EMAIL_HOST_PASSWORD = 'kdrerwbklpoooxlp'
+
+CELERY_BROKER_URL = 'redis://:password@137.184.114.36:6379'
+CELERY_RESULT_BACKEND = 'redis://:password@137.184.114.36:6379'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

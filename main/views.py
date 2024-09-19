@@ -10,7 +10,7 @@ from main.serializers import CarBrandSerializer, CarBrandSingleSerializer, CarSe
 from django.shortcuts import render, redirect
 from .forms import CarForm
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
+from main.tasks import send_email
 
 
 class CarBrandListView(ListAPIView):
@@ -48,7 +48,6 @@ def create_car_view(request):
 
 @api_view(['GET'])
 def send_email_view(request):
-    send_mail('Test mail', 'this is a test email',
-              'askarjon.abdullayev@gmail.com', ['aslbeksaitqulov0124@gmail.com'], fail_silently=False)
+    send_email.delay()
 
     return Response({'status': 'ok'})
